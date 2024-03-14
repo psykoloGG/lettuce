@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('name');
+            $table->date('creation_date');
+            $table->bigInteger('admin_id')->unsigned(); // Admin of the group
+
+            $table->foreign('admin_id')->references('id')->on('users')
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
