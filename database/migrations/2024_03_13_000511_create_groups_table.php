@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string("content");
-            
+            $table->string('name');
+            $table->unsignedBigInteger('admin_id'); // Admin of the group
+            $table->enum('privacy', ['public', 'private']); // Privacy
+
+            $table->foreign('admin_id')->references('id')->on('users')
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('groups');
     }
 };

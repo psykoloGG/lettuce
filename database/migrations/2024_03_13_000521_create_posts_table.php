@@ -14,12 +14,16 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->bigInteger('user_id')->unsigned(); // Author
+            $table->string('content');
+            $table->unsignedBigInteger('author_id'); // Author
+            $table->unsignedBigInteger('group_id')->nullable(); // Group
             
-            $table->foreign('user_id')->references('id')->on('users')
+            $table->foreign('author_id')->references('id')->on('users')
+                ->onDelete('cascade')->onUpdate('cascade');
+
+            $table->foreign('group_id')->references('id')->on('groups')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
-
     }
 
     /**

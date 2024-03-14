@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Group;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,9 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'content' => fake()->paragraph(1),
+            'author_id' => User::all()->random(),
+            'group_id' => Group::all()->random()
         ];
     }
 }

@@ -13,6 +13,6 @@ class GroupTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Group::factory()->count(10)->create();
+        Group::factory()->count(3)->create();
     }
 }
